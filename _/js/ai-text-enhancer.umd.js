@@ -347,15 +347,15 @@
 					p
 				);
 			}
-			const g = document.createElement("div");
-			g.className = "response-content-wrapper";
-			const u = "" === e.content || e.content.length < 5,
-				v = u ? "response-content typing-animation" : "response-content";
+			const u = document.createElement("div");
+			u.className = "response-content-wrapper";
+			const g = "" === e.content || e.content.length < 5,
+				v = g ? "response-content typing-animation" : "response-content";
 			let f;
 			f =
 				"image-upload" === e.action
 					? e.content
-					: u
+					: g
 					? "chat-response" === e.action
 						? '<div class="typing-indicator">Escribiendo respuesta...</div>'
 						: [
@@ -405,7 +405,7 @@
 					? ""
 					: `\n    <div class="response-footer">\n      <div class="response-tools">\n        ${b}\n      </div>\n      <div class="response-actions">\n        <button class="response-action copy-button" data-response-id="${e.id}">\n          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">\n            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>\n            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>\n          </svg>\n        </button>\n        <button class="response-action use-button" data-response-id="${e.id}">\n          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">\n            <polyline points="20 6 9 17 4 12"/>\n          </svg>\n        </button>\n        <button class="response-action retry-button" data-response-id="${e.id}" data-action="${e.action}">\n          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">\n            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/>\n          </svg>\n        </button>\n      </div>\n    </div>\n  `;
 			if (
-				((g.innerHTML = `\n    <div class="response-header">\n      <div class="response-tool">\n        ${n(
+				((u.innerHTML = `\n    <div class="response-header">\n      <div class="response-tool">\n        ${n(
 					e.action
 				)}\n        <span>${
 					(null == (c = this.translations) ? void 0 : c.tools[e.action]) ||
@@ -421,7 +421,7 @@
 						'\n      /* Estilos para elementos miniatura */\n      .mini {\n        margin: 0 !important;\n        padding: 0 !important;\n      }\n      \n      .response-header.mini {\n        margin-bottom: 0.25rem !important;\n      }\n      \n      .response-footer.mini {\n        padding-top: 0.25rem !important;\n        display: flex;\n        justify-content: flex-end;\n      }\n      \n      .question-image.mini {\n        width: 60px !important;\n        height: 60px !important;\n      }\n      \n      .question-image.mini img {\n        width: 60px !important;\n        height: 60px !important;\n      }\n      \n      .response-action.mini {\n        padding: 0.25rem !important;\n      }\n      \n      /* Estilos específicos para mensajes de información */\n      .response-entry[data-action="info"],\n      .response-entry[data-action="error"],\n      .response-entry[data-action="chat-error"] {\n        padding: 0.5rem 0.75rem !important;\n      }\n      \n      /* Estilos específicos para preguntas */\n      .response-entry[data-action="chat-question"] {\n        padding: 0.5rem 0.75rem !important;\n      }\n      \n      .question-container {\n        display: flex;\n        gap: 0.5rem;\n        align-items: flex-start;\n        margin: 0;\n        padding: 0;\n      }\n    '),
 					this.shadowRoot.appendChild(e);
 			}
-			return p.appendChild(g), p;
+			return p.appendChild(u), p;
 		}
 		setupEventListeners() {
 			this.shadowRoot.addEventListener("click", (e) => {
@@ -1132,7 +1132,9 @@
 					},
 					temperature: e.temperature || 0.7,
 					sessionToken: e.sessionToken || "",
-					systemPrompt: e.systemPrompt,
+					systemPrompt:
+						e.systemPrompt ||
+						"Actúa como un experto en redacción de descripciones de productos para tiendas en línea.\n\nTu tarea es generar o mejorar la descripción de un producto con un enfoque atractivo y persuasivo, destacando sus características principales, beneficios y posibles usos.\n\nSi el usuario ya ha escrito una descripción: Mejórala manteniendo su esencia, pero haciéndola más clara, persuasiva y optimizada para ventas.\n\nSi la descripción está vacía: Genera una nueva descripción atractiva, destacando características y beneficios. Usa un tono profesional y cercano, adaptado a una tienda en línea.\n\nSi hay una imagen del producto, aprovecha los detalles visuales para enriquecer la descripción.\n\nSi aplica, menciona información relevante del comercio para reforzar la confianza del comprador (envíos, garantía, atención al cliente, etc.).\n\nMantén el texto claro, sin repeticiones innecesarias, y optimizado para SEO si es posible.",
 					tenantId: e.tenantId || "",
 					userId: e.userId || "",
 				});
@@ -1592,9 +1594,6 @@
 			super(e), (this.name = "APIError"), (this.originalError = n);
 		}
 	}
-	function g(e = {}) {
-		return new h(e);
-	}
 	class u {
 		constructor(e = {}) {
 			(this.options = {
@@ -1719,7 +1718,7 @@
 			}
 		}
 	}
-	class v {
+	class g {
 		constructor(e) {
 			console.log("[EditorAdapter] Initializing with editor ID:", e),
 				(this.editorId = e),
@@ -1743,7 +1742,7 @@
 					: console.error("[EditorAdapter] Editor not available");
 		}
 	}
-	const f = {
+	const v = {
 			handleKeyboard(e) {
 				if (e.ctrlKey || e.metaKey)
 					switch (e.key.toLowerCase()) {
@@ -1802,7 +1801,7 @@
 					e.preventDefault();
 			},
 		},
-		y = {
+		f = {
 			handleResponseCopy(e) {
 				var n;
 				console.log("[ResponseHandlers] Copy event received:", e.detail);
@@ -1852,7 +1851,7 @@
 					: console.warn("[ResponseHandlers] No response found for ID:", t);
 			},
 		},
-		b = {
+		y = {
 			isImageUsed(e) {
 				if (!this.responseHistory) return !1;
 				const n = e instanceof File ? e.name : e;
@@ -1912,7 +1911,7 @@
 				}">\n        <div class="image-preview-content">\n          <div class="image-preview-thumbnail">\n            <img src="${o}" alt="Product preview - ${r}">\n          </div>\n        </div>\n      </div>\n    `;
 			},
 		},
-		w = {
+		b = {
 			initializeStateManager() {
 				(this.stateManager = ((e) => {
 					const n = {};
@@ -2032,11 +2031,11 @@
 				}
 			},
 		};
-	class x extends HTMLElement {
+	class w extends HTMLElement {
 		constructor() {
 			var e;
 			super(),
-				Object.assign(this, f, y, b, w),
+				Object.assign(this, v, f, y, b),
 				customElements.get("ai-toolbar") ||
 					customElements.define("ai-toolbar", s),
 				customElements.get("chat-with-image") ||
@@ -2112,6 +2111,7 @@
 				"tenant-id",
 				"user-id",
 				"quota-endpoint",
+				"proxy-endpoint",
 			];
 		}
 		get language() {
@@ -2155,6 +2155,9 @@
 		}
 		get context() {
 			return this.getAttribute("context") || "";
+		}
+		get proxyEndpoint() {
+			return this.getAttribute("proxy-endpoint");
 		}
 		async connectedCallback() {
 			try {
@@ -2243,11 +2246,13 @@
 						break;
 					case "api-provider":
 					case "api-model":
+					case "proxy-endpoint":
 						this.isInitialized &&
 							this.apiClient &&
 							this.apiClient.updateConfig({
 								provider: this.apiProvider,
 								model: this.apiModel,
+								proxyEndpoint: this.proxyEndpoint,
 							});
 						break;
 					case "image-url":
@@ -2379,33 +2384,22 @@
 		async initializeComponents() {
 			if (!this.isInitialized)
 				try {
-					const e = {
-						proxyEndpoint: "http://llmproxy.test:8080/api/llm-proxy",
-					};
 					await this.markdownHandler.initialize(),
-						console.log("[AITextEnhancer] Markdown handler initialized"),
-						(this.apiClient = g({
-							provider: this.apiProvider,
-							model: this.apiModel,
-							systemPrompt: this.prompt,
-							temperature: 0.7,
-							proxyEndpoint: e.proxyEndpoint,
-							tenantId: this.getAttribute("tenant-id") || "default",
-							userId: this.getAttribute("user-id") || "default",
-						})),
-						await this.markdownHandler.initialize(),
-						console.log("[AITextEnhancer] Markdown handler initialized"),
-						(this.apiClient = g({
-							provider: this.apiProvider,
-							model: this.apiModel,
-							systemPrompt: this.prompt,
-							temperature: 0.7,
-							proxyEndpoint:
-								e.proxyEndpoint || "http://llmproxy.test:8080/api/llm-proxy",
-							tenantId: this.getAttribute("tenant-id") || "default",
-							userId: this.getAttribute("user-id") || "default",
-						})),
-						this.editorId && (this.editorAdapter = new v(this.editorId));
+						console.log("[AITextEnhancer] Markdown handler initialized");
+					const e =
+						this.proxyEndpoint || "http://llmproxy.test:8080/api/llm-proxy";
+					(this.apiClient = (function (e = {}) {
+						return new h(e);
+					})({
+						provider: this.apiProvider,
+						model: this.apiModel,
+						systemPrompt: this.prompt,
+						temperature: 0.7,
+						proxyEndpoint: e,
+						tenantId: this.getAttribute("tenant-id") || "default",
+						userId: this.getAttribute("user-id") || "default",
+					})),
+						this.editorId && (this.editorAdapter = new g(this.editorId));
 					const n = this.shadowRoot.querySelector("response-history");
 					n &&
 						((n.markdownHandler = this.markdownHandler),
@@ -2519,6 +2513,6 @@
 			this.responseHistory.addResponse(t);
 		}
 	}
-	return customElements.define("ai-text-enhancer", x), x;
+	return customElements.define("ai-text-enhancer", w), w;
 });
 //# sourceMappingURL=ai-text-enhancer.umd.js.map

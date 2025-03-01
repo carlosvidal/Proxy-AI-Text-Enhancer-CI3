@@ -122,7 +122,8 @@ Features include durability and ease of use. Good value for money.
 			editor-id="editor2"
 			api-provider="openai"
 			api-model="gpt-4-turbo"
-			language="es">
+			language="es"
+			proxy-endpoint="http://llmproxy.test:8080/api/llm-proxy">
 		</ai-text-enhancer>
 	</div>
 
