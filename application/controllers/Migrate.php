@@ -38,6 +38,28 @@ class Migrate extends CI_Controller
     {
         $this->output->set_content_type('application/json');
 
+        // Verificar si la base de datos existe
+        $db_file = $this->db->database;
+        if (!file_exists($db_file)) {
+            $dir = dirname($db_file);
+            if (!is_dir($dir)) {
+                mkdir($dir, 0775, true);
+            }
+            touch($db_file);
+            chmod($db_file, 0666);
+        }
+
+        // Verificar si la tabla de migraciones existe
+        if (!$this->db->table_exists('migrations')) {
+            $this->db->query("
+                CREATE TABLE migrations (
+                    version INT NOT NULL PRIMARY KEY
+                )
+            ");
+            $this->db->query("INSERT INTO migrations (version) VALUES (0)");
+        }
+
+        // Ejecutar migraciones
         if ($this->migration->current() === FALSE) {
             $this->output->set_output(json_encode([
                 'success' => FALSE,
