@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'LLM Proxy Usage Dashboard' ?></title>
-    
+    <title><?php echo isset($title) ? $title : 'LLM Proxy Usage Dashboard'; ?></title>
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Chart.js -->
@@ -26,24 +28,24 @@
             --text-muted: #6b7280;
             --border-color: #e5e7eb;
         }
-        
+
         body {
             background-color: var(--background-color);
             color: var(--text-color);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             padding-top: 56px;
         }
-        
+
         .navbar {
             background-color: var(--card-bg-color);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-        
+
         .navbar-brand {
             font-weight: 600;
             color: var(--primary-color);
         }
-        
+
         .card {
             border: none;
             border-radius: 10px;
@@ -51,18 +53,18 @@
             margin-bottom: 20px;
             background-color: var(--card-bg-color);
         }
-        
+
         .card-header {
             background-color: var(--card-bg-color);
             border-bottom: 1px solid var(--border-color);
             font-weight: 600;
             padding: 15px 20px;
         }
-        
+
         .card-body {
             padding: 20px;
         }
-        
+
         .stat-card {
             text-align: center;
             padding: 15px;
@@ -71,48 +73,48 @@
             background-color: var(--card-bg-color);
             transition: transform 0.2s ease-in-out;
         }
-        
+
         .stat-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .stat-card .stat-number {
             font-size: 2rem;
             font-weight: bold;
             margin: 10px 0;
             color: var(--primary-color);
         }
-        
+
         .stat-card .stat-label {
             font-size: 0.9rem;
             color: var(--text-muted);
             text-transform: uppercase;
         }
-        
+
         .stat-card .stat-icon {
             font-size: 2rem;
             margin-bottom: 15px;
             color: var(--primary-color);
         }
-        
+
         .progress {
             height: 8px;
             margin-bottom: 10px;
             background-color: var(--background-color);
         }
-        
+
         .table {
             color: var(--text-color);
         }
-        
+
         .table thead th {
             border-bottom: 2px solid var(--border-color);
-            color: var(--text-muted);
+            color: var (--text-muted);
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.8rem;
         }
-        
+
         .badge-provider {
             background-color: var(--accent-color);
             color: white;
@@ -121,7 +123,7 @@
             border-radius: 15px;
             font-size: 0.8rem;
         }
-        
+
         .badge-model {
             background-color: var(--secondary-color);
             color: white;
@@ -130,35 +132,50 @@
             border-radius: 15px;
             font-size: 0.8rem;
         }
-        
+
         .pagination .page-link {
             color: var(--primary-color);
         }
-        
+
         .pagination .page-item.active .page-link {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
         }
-        
+
         /* Stats icons colors */
-        .text-primary { color: var(--primary-color) !important; }
-        .text-success { color: var(--success-color) !important; }
-        .text-warning { color: var(--warning-color) !important; }
-        .text-danger { color: var(--danger-color) !important; }
-        .text-info { color: var(--accent-color) !important; }
-        
+        .text-primary {
+            color: var(--primary-color) !important;
+        }
+
+        .text-success {
+            color: var(--success-color) !important;
+        }
+
+        .text-warning {
+            color: var(--warning-color) !important;
+        }
+
+        .text-danger {
+            color: var(--danger-color) !important;
+        }
+
+        .text-info {
+            color: var(--accent-color) !important;
+        }
+
         /* Responsive fixes */
         @media (max-width: 768px) {
             .stat-card .stat-number {
                 font-size: 1.5rem;
             }
-            
+
             .stat-card .stat-icon {
                 font-size: 1.5rem;
             }
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
@@ -202,4 +219,4 @@
     </nav>
 
     <div class="container mt-4 mb-5">
-        <h1 class="mb-4"><?= $title ?? 'LLM Proxy Usage Dashboard' ?></h1>
+        <h1 class="mb-4"><?php echo isset($title) ? $title : 'LLM Proxy Usage Dashboard'; ?></h1>
