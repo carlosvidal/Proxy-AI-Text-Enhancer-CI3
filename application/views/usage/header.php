@@ -213,6 +213,11 @@
                             <i class="fas fa-memory me-1"></i> Cache
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $this->uri->segment(1) == 'tenants' ? 'active' : '' ?>" href="<?= site_url('tenants') ?>">
+                            <i class="fas fa-building me-1"></i> Tenants
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

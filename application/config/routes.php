@@ -90,3 +90,21 @@ $route['usage']['get'] = 'usage/index';
 $route['usage']['get'] = 'usage/logs';
 $route['usage']['get'] = 'usage/quotas';
 $route['usage']['get'] = 'usage/providers';
+
+
+// Rutas de gestión de tenants
+$route['tenants']['get'] = 'tenants/index';
+$route['tenants/create']['get'] = 'tenants/create';
+$route['tenants/create']['post'] = 'tenants/create';
+$route['tenants/view/(:any)']['get'] = 'tenants/view/$1';
+$route['tenants/delete/(:any)']['get'] = 'tenants/delete/$1';
+$route['tenants/delete/(:any)']['post'] = 'tenants/delete/$1';
+$route['tenants/usage/(:any)']['get'] = 'tenants/usage/$1';
+
+// Rutas para gestión de usuarios dentro de tenants
+$route['tenants/add_user/(:any)']['get'] = 'tenants/add_user/$1';
+$route['tenants/add_user/(:any)']['post'] = 'tenants/add_user/$1';
+$route['tenants/edit_user/(:any)/(:any)']['get'] = 'tenants/edit_user/$1/$2';
+$route['tenants/edit_user/(:any)/(:any)']['post'] = 'tenants/edit_user/$1/$2';
+$route['tenants/delete_user/(:any)/(:any)']['get'] = 'tenants/delete_user/$1/$2';
+$route['tenants/delete_user/(:any)/(:any)']['post'] = 'tenants/delete_user/$1/$2';
